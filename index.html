@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Objednávkový systém</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginBox" class="box">
+    <h2>Přihlášení</h2>
+    <input id="loginName" placeholder="Jméno">
+    <input id="loginPass" type="password" placeholder="Heslo">
+    <button onclick="login()">Přihlásit</button>
+    <p id="loginMsg"></p>
+</div>
+
+<div id="app" class="hidden">
+    <div class="sidebar">
+        <button id="addBtn" class="hidden" onclick="showAdd()">+</button>
+        <button id="ordersBtn" class="hidden" onclick="showOrders()">Objednávky</button>
+    </div>
+
+    <div class="content">
+        <h2>Produkty</h2>
+        <div id="products"></div>
+        <div id="message"></div>
+    </div>
+</div>
+
+<div id="addBox" class="box hidden">
+    <h3>Přidat věc</h3>
+    <input id="itemName" placeholder="Název věci">
+    <button onclick="addItem()">OK</button>
+</div>
+
+<div id="ordersBox" class="box hidden">
+    <h3>Objednávky</h3>
+    <div id="ordersList"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
