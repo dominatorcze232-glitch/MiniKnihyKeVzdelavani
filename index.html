@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <title>Objednávkový systém</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Objednávkový systém</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="loginBox" class="box">
+<div class="box" id="authBox">
     <h2>Přihlášení</h2>
     <input id="loginName" placeholder="Jméno">
     <input id="loginPass" type="password" placeholder="Heslo">
     <button onclick="login()">Přihlásit</button>
-    <p id="loginMsg"></p>
+
+    <h3>Registrace</h3>
+    <input id="regName" placeholder="Nové jméno">
+    <input id="regPass" type="password" placeholder="Nové heslo">
+    <button onclick="register()">Registrovat</button>
+
+    <p id="msg"></p>
 </div>
 
 <div id="app" class="hidden">
     <div class="sidebar">
         <button id="addBtn" class="hidden" onclick="showAdd()">+</button>
-        <button id="ordersBtn" class="hidden" onclick="showOrders()">Objednávky</button>
+        <button id="ordersBtn" class="hidden" onclick="showOrders()">📦</button>
     </div>
 
     <div class="content">
         <h2>Produkty</h2>
         <div id="products"></div>
-        <div id="message"></div>
+        <div id="info"></div>
     </div>
 </div>
 
 <div id="addBox" class="box hidden">
-    <h3>Přidat věc</h3>
-    <input id="itemName" placeholder="Název věci">
+    <h3>Přidat produkt</h3>
+    <input id="itemName" placeholder="Název">
     <button onclick="addItem()">OK</button>
 </div>
 
