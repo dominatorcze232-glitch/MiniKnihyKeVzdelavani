@@ -1,116 +1,62 @@
-// předvytvořený účet
-const admin = {
-    name: "Červeňák",
-    pass: "Dominik2014"
-};
-
-let currentUser = null;
-let products = JSON.parse(localStorage.getItem("products")) || [];
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-// LOGIN
-function login() {
-    const name = loginName.value;
-    const pass = loginPass.value;
-
-    if (!name || !pass) {
-        loginMsg.innerText = "Vyplňte údaje!";
-        return;
-    }
-
-    currentUser = name;
-
-    loginBox.classList.add("hidden");
-    app.classList.remove("hidden");
-
-    if (name === admin.name && pass === admin.pass) {
-        addBtn.classList.remove("hidden");
-        ordersBtn.classList.remove("hidden");
-    }
-
-    renderProducts();
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #0a3d62, #1e90ff);
+    color: white;
 }
 
-// ADD ITEM
-function showAdd() {
-    addBox.classList.remove("hidden");
+.hidden { display: none; }
+
+.box {
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    margin: 30px auto;
+    width: 320px;
+    border-radius: 12px;
+    text-align: center;
 }
 
-function addItem() {
-    const name = itemName.value;
-    if (!name) return;
-
-    products.push(name);
-    localStorage.setItem("products", JSON.stringify(products));
-
-    addBox.classList.add("hidden");
-    itemName.value = "";
-    renderProducts();
+input, button {
+    width: 95%;
+    padding: 10px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
 }
 
-// PRODUCTS
-function renderProducts() {
-    productsDiv = document.getElementById("products");
-    productsDiv.innerHTML = "";
-
-    products.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "product";
-        div.innerHTML = `
-            ${p}
-            <button onclick="order('${p}')">Objednat</button>
-        `;
-        productsDiv.appendChild(div);
-    });
+button {
+    background: #0fbcf9;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-// ORDER
-function order(item) {
-    orders.push({user: currentUser, item});
-    localStorage.setItem("orders", JSON.stringify(orders));
-    message.innerText = "Objednáno!";
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 70px;
+    height: 100%;
+    background: #082b45;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-// ADMIN ORDERS
-function showOrders() {
-    ordersBox.classList.remove("hidden");
-    const list = document.getElementById("ordersList");
-    list.innerHTML = "";
-
-    orders.forEach((o, i) => {
-        const div = document.createElement("div");
-        div.innerHTML = `
-            ${o.user} – ${o.item}
-            <button onclick="deleteOrder(${i})">Vymazat</button>
-        `;
-        list.appendChild(div);
-    });
+.sidebar button {
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
 }
 
-// DELETE ORDER
-function deleteOrder(i) {
-    const user = orders[i].user;
-    orders.splice(i, 1);
-    localStorage.setItem("orders", JSON.stringify(orders));
-
-    localStorage.setItem("notify_" + user, "true");
-    showOrders();
+.content {
+    margin-left: 90px;
+    padding: 20px;
 }
 
-// DELIVERY MESSAGE
-window.onload = () => {
-    const notify = localStorage.getItem("notify_" + currentUser);
-    if (notify) {
-        let sec = 5;
-        message.innerText = `Vaše objednávka bude zítra doručena! (${sec})`;
-        const int = setInterval(() => {
-            sec--;
-            message.innerText = `Vaše objednávka bude zítra doručena! (${sec})`;
-            if (sec === 0) {
-                clearInterval(int);
-                message.innerText = "";
-                localStorage.removeItem("notify_" + currentUser);
-            }
-        }, 1000);
-    }
-};
+.product {
+    background: rgba(255,255,255,0.2);
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
